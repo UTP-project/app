@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, ScrollView} from 'react-native';
-import {Button, Card, Text} from 'react-native-elements';
+import {Card, Text} from 'react-native-elements';
 import {TouchableNativeFeedback} from 'react-native-gesture-handler';
 
 const Journey = () => {
@@ -60,12 +60,6 @@ const Journey = () => {
           ))}
         </View>
       </ScrollView>
-      <Button
-        containerStyle={styles.addButtonContainer}
-        buttonStyle={styles.addButton}
-        title="Add"
-        onPress={() => {}}
-      />
     </>
   );
 };
