@@ -20,13 +20,7 @@ const Home = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="HomeTab" component={HomeTab} />
-      <Stack.Screen
-        name="CreateJourney"
-        component={CreateJourney}
-        options={{
-          headerTransparent: true,
-        }}
-      />
+      <Stack.Screen name="CreateJourney" component={CreateJourney} />
     </Stack.Navigator>
   );
 };

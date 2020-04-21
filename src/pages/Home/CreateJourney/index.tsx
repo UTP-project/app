@@ -1,27 +1,22 @@
 import React from 'react';
-import {useHeaderHeight} from '@react-navigation/stack';
-import {StyleSheet, View, Text} from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
+import PickDate from './PickDate';
 
-const CreateJourney = () => {
-  const headerHeight = useHeaderHeight();
-  const containerStyle = StyleSheet.flatten([
-    styles.container,
-    {
-      marginTop: headerHeight,
-    },
-  ]);
-
-  return (
-    <View style={containerStyle}>
-      <Text>new journey</Text>
-    </View>
-  );
+type CreateJourneyParamList = {
+  Date: undefined;
+  Info: undefined;
+  City: undefined;
+  Viewpoint: undefined;
 };
 
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-  },
-});
+const Stack = createStackNavigator<CreateJourneyParamList>();
+
+const CreateJourney = () => {
+  return (
+    <Stack.Navigator headerMode="none">
+      <Stack.Screen name="Date" component={PickDate} />
+    </Stack.Navigator>
+  );
+};
 
 export default CreateJourney;
