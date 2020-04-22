@@ -1,15 +1,12 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useState, useRef} from 'react';
 import {CalendarList, DateObject, PeriodMarking} from 'react-native-calendars';
 import {dateFormat} from '../../../common/utils';
 
 export type DateRange = [string | undefined, string | undefined];
 
 const PickDate = () => {
-  const today = React.useRef(dateFormat(new Date()));
-  const [dateRange, setDateRange] = React.useState<DateRange>([
-    undefined,
-    undefined,
-  ]);
+  const today = useRef(dateFormat(new Date()));
+  const [dateRange, setDateRange] = useState<DateRange>([undefined, undefined]);
 
   const getPeriod = (start: string | undefined, end: string | undefined) => {
     if (!start) {
