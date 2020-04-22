@@ -1,10 +1,27 @@
 import React, {useMemo, useState, useRef} from 'react';
 import {CalendarList, DateObject, PeriodMarking} from 'react-native-calendars';
+import {View, StyleSheet, Text} from 'react-native';
+import {Icon, Button} from 'react-native-elements';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {CompositeNavigationProp} from '@react-navigation/native';
+import {TouchableNativeFeedback} from 'react-native-gesture-handler';
+
+import {CreateJourneyParamList} from '.';
+import {HomeStackParamList} from '..';
 import {dateFormat} from '../../../common/utils';
 
 export type DateRange = [string | undefined, string | undefined];
 
-const PickDate = () => {
+type PickDateNavigationProp = CompositeNavigationProp<
+  StackNavigationProp<CreateJourneyParamList, 'Date'>,
+  StackNavigationProp<HomeStackParamList>
+>;
+
+type Props = {
+  navigation: PickDateNavigationProp;
+};
+
+const PickDate = ({navigation}: Props) => {
   const today = useRef(dateFormat(new Date()));
   const [dateRange, setDateRange] = useState<DateRange>([undefined, undefined]);
 
@@ -54,25 +71,82 @@ const PickDate = () => {
   };
 
   return (
-    <CalendarList
-      pastScrollRange={0}
-      minDate={today.current}
-      current={today.current}
-      markingType="period"
-      markedDates={periodDay}
-      theme={{
-        'stylesheet.day.period': {
-          base: {
-            overflow: 'hidden',
-            height: 34,
-            alignItems: 'center',
-            width: 38,
+    <>
+      <View style={styles.header}>
+        <Icon
+          name="arrow-back"
+          color="#fff"
+          size={28}
+          Component={TouchableNativeFeedback}
+          onPress={() => {
+            navigation.navigate('HomeTab');
+          }}
+        />
+        <View style={styles.headerCenter}>
+          <Text style={styles.centerText}>选择日期</Text>
+        </View>
+        <Button
+          title="下一步"
+          type="clear"
+          titleStyle={styles.rightText}
+          disabledTitleStyle={styles.disabledStyle}
+          disabled={Boolean(
+            dateRange.filter((date) => date === undefined).length
+          )}
+          onPress={() => {
+            navigation.navigate('Info');
+          }}
+        />
+      </View>
+      <CalendarList
+        pastScrollRange={0}
+        minDate={today.current}
+        current={today.current}
+        markingType="period"
+        markedDates={periodDay}
+        theme={{
+          'stylesheet.day.period': {
+            base: {
+              overflow: 'hidden',
+              height: 34,
+              alignItems: 'center',
+              width: 38,
+            },
           },
-        },
-      }}
-      onDayPress={handleDayPress}
-    />
+        }}
+        onDayPress={handleDayPress}
+      />
+    </>
   );
 };
+
+const styles = StyleSheet.create({
+  header: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    height: 64,
+    backgroundColor: '#4DB6AC',
+  },
+  headerCenter: {
+    flex: 1,
+    marginLeft: 32,
+  },
+  headerRight: {
+    paddingHorizontal: 6,
+    paddingVertical: 12,
+  },
+  centerText: {
+    color: '#fff',
+    fontSize: 20,
+  },
+  rightText: {
+    color: '#fff',
+  },
+  disabledStyle: {
+    color: '#cfcfcf',
+  },
+});
 
 export default PickDate;

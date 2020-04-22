@@ -1,5 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+
 import HomeTab from './HomeTab';
 import CreateJourney from './CreateJourney';
 
@@ -20,7 +21,11 @@ const Home = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="HomeTab" component={HomeTab} />
-      <Stack.Screen name="CreateJourney" component={CreateJourney} />
+      <Stack.Screen
+        name="CreateJourney"
+        component={CreateJourney}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 };

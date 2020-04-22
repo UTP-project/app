@@ -3,7 +3,7 @@ import {InteractionManager} from 'react-native';
 
 import EmptyComp from './EmptyComp';
 
-const useReady = (WrappedComp: React.ComponentType) => {
+const useReady = (WrappedComp: React.ComponentType<any>) => {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
