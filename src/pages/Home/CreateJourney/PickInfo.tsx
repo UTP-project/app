@@ -3,9 +3,50 @@ import {Text, View, StyleSheet, Dimensions} from 'react-native';
 import {Icon, Button} from 'react-native-elements';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {TouchableNativeFeedback} from 'react-native-gesture-handler';
-import {Picker} from '@react-native-community/picker';
 
 import {CreateJourneyParamList} from '.';
+import Picker, {Option} from '../../../components/Picker';
+
+type PickInfoOption = {
+  pplNum: Option[];
+  pplType: Option[];
+  travelMode: Option[];
+  dayTime: Option[];
+};
+
+const infoOptions: PickInfoOption = {
+  pplNum: [
+    {label: '不限', value: 0},
+    {label: '1人', value: 1},
+    {label: '2人', value: 2},
+    {label: '3-5人', value: 3},
+    {label: '6-9人', value: 4},
+    {label: '10人以上', value: 5},
+  ],
+  pplType: [
+    {label: '不限', value: 0},
+    {label: '学生', value: 1},
+    {label: '同事', value: 2},
+    {label: '亲子', value: 3},
+  ],
+  travelMode: [
+    {label: '不限', value: 0},
+    {label: '公交', value: 1},
+    {label: '驾车', value: 2},
+  ],
+  dayTime: [
+    {label: '3小时', value: 0},
+    {label: '4小时', value: 1},
+    {label: '5小时', value: 2},
+    {label: '6小时', value: 3},
+    {label: '7小时', value: 4},
+    {label: '8小时', value: 5},
+    {label: '9小时', value: 6},
+    {label: '10小时', value: 7},
+    {label: '11小时', value: 8},
+    {label: '12小时', value: 9},
+  ],
+};
 
 type PickInfoNavigationProp = StackNavigationProp<
   CreateJourneyParamList,
@@ -51,65 +92,42 @@ const PickInfo = ({navigation}: Props) => {
         <View>
           <Text>人数</Text>
           <Picker
-            selectedValue={pplNum}
-            prompt="人数"
-            onValueChange={(itemValue) => {
-              setPplNum(+itemValue);
-            }}>
-            <Picker.Item label="不限" value={0} />
-            <Picker.Item label="1人" value={1} />
-            <Picker.Item label="2人" value={2} />
-            <Picker.Item label="3~5人" value={3} />
-            <Picker.Item label="6~9人" value={4} />
-            <Picker.Item label="10人以上" value={5} />
-          </Picker>
+            selected={pplNum}
+            options={infoOptions.pplNum}
+            onSelect={(value) => {
+              setPplNum(+value);
+            }}
+          />
         </View>
         <View>
           <Text>人群</Text>
           <Picker
-            selectedValue={pplType}
-            prompt="人群"
-            onValueChange={(itemValue) => {
-              setPplType(+itemValue);
-            }}>
-            <Picker.Item label="不限" value={0} />
-            <Picker.Item label="学生" value={1} />
-            <Picker.Item label="同事" value={2} />
-            <Picker.Item label="亲子" value={3} />
-          </Picker>
+            selected={pplType}
+            options={infoOptions.pplType}
+            onSelect={(value) => {
+              setPplType(+value);
+            }}
+          />
         </View>
         <View>
           <Text>出行方式</Text>
           <Picker
-            selectedValue={travelMode}
-            prompt="出行方式"
-            onValueChange={(itemValue) => {
-              setTavelMode(+itemValue);
-            }}>
-            <Picker.Item label="不限" value={0} />
-            <Picker.Item label="驾车" value={1} />
-            <Picker.Item label="公交" value={2} />
-          </Picker>
+            selected={travelMode}
+            options={infoOptions.travelMode}
+            onSelect={(value) => {
+              setTavelMode(+value);
+            }}
+          />
         </View>
         <View>
           <Text>每日游玩时间</Text>
           <Picker
-            selectedValue={dayTime}
-            prompt="每日游玩时间"
-            onValueChange={(itemValue) => {
-              setDayTime(+itemValue);
-            }}>
-            <Picker.Item label="3小时" value={0} />
-            <Picker.Item label="4小时" value={1} />
-            <Picker.Item label="5小时" value={2} />
-            <Picker.Item label="6小时" value={3} />
-            <Picker.Item label="7小时" value={4} />
-            <Picker.Item label="8小时" value={5} />
-            <Picker.Item label="9小时" value={6} />
-            <Picker.Item label="10小时" value={7} />
-            <Picker.Item label="11小时" value={8} />
-            <Picker.Item label="12小时" value={9} />
-          </Picker>
+            selected={dayTime}
+            options={infoOptions.dayTime}
+            onSelect={(value) => {
+              setDayTime(+value);
+            }}
+          />
         </View>
       </View>
     </>
@@ -146,8 +164,8 @@ const styles = StyleSheet.create({
   pickerContainer: {
     height: Dimensions.get('window').height - 64,
     paddingHorizontal: 16,
-    paddingTop: 48,
-    paddingBottom: 60,
+    paddingTop: 36,
+    paddingBottom: 64,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
