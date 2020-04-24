@@ -1,9 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {InteractionManager} from 'react-native';
 
-import EmptyComp from './EmptyComp';
-
-const useReady = (WrappedComp: React.ComponentType<any>) => {
+const useReady = () => {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -12,7 +10,7 @@ const useReady = (WrappedComp: React.ComponentType<any>) => {
     });
   }, []);
 
-  return ready ? (props: any) => <WrappedComp {...props} /> : EmptyComp;
+  return ready;
 };
 
 export default useReady;

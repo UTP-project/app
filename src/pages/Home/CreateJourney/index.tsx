@@ -1,7 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import useReady from '../../../components/useReady';
 import PickDate from './PickDate';
 import PickInfo from './PickInfo';
 
@@ -15,11 +14,9 @@ export type CreateJourneyParamList = {
 const Stack = createStackNavigator<CreateJourneyParamList>();
 
 const CreateJourney = () => {
-  const WrappedPickDate = useReady(PickDate);
-
   return (
     <Stack.Navigator headerMode="none">
-      <Stack.Screen name="Date" component={WrappedPickDate} />
+      <Stack.Screen name="Date" component={PickDate} />
       <Stack.Screen name="Info" component={PickInfo} />
     </Stack.Navigator>
   );

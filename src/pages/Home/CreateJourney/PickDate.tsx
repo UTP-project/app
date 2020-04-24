@@ -9,6 +9,7 @@ import {TouchableNativeFeedback} from 'react-native-gesture-handler';
 import {CreateJourneyParamList} from '.';
 import {HomeStackParamList} from '..';
 import {dateFormat} from '../../../common/utils';
+import useReady from '../../../components/useReady';
 
 export type DateRange = [string | undefined, string | undefined];
 
@@ -22,6 +23,8 @@ type Props = {
 };
 
 const PickDate = ({navigation}: Props) => {
+  const ready = useReady();
+
   const today = useRef(dateFormat(new Date()));
   const [dateRange, setDateRange] = useState<DateRange>([undefined, undefined]);
 
@@ -72,50 +75,54 @@ const PickDate = ({navigation}: Props) => {
 
   return (
     <>
-      <View style={styles.header}>
-        <Icon
-          name="arrow-back"
-          color="#fff"
-          size={28}
-          Component={TouchableNativeFeedback}
-          onPress={() => {
-            navigation.navigate('HomeTab');
-          }}
-        />
-        <View style={styles.headerCenter}>
-          <Text style={styles.centerText}>选择日期</Text>
-        </View>
-        <Button
-          title="下一步"
-          type="clear"
-          titleStyle={styles.rightText}
-          disabledTitleStyle={styles.disabledStyle}
-          disabled={Boolean(
-            dateRange.filter((date) => date === undefined).length
-          )}
-          onPress={() => {
-            navigation.navigate('Info');
-          }}
-        />
-      </View>
-      <CalendarList
-        pastScrollRange={0}
-        minDate={today.current}
-        current={today.current}
-        markingType="period"
-        markedDates={periodDay}
-        theme={{
-          'stylesheet.day.period': {
-            base: {
-              overflow: 'hidden',
-              height: 34,
-              alignItems: 'center',
-              width: 38,
-            },
-          },
-        }}
-        onDayPress={handleDayPress}
-      />
+      {ready && (
+        <>
+          <View style={styles.header}>
+            <Icon
+              name="arrow-back"
+              color="#fff"
+              size={28}
+              Component={TouchableNativeFeedback}
+              onPress={() => {
+                navigation.navigate('HomeTab');
+              }}
+            />
+            <View style={styles.headerCenter}>
+              <Text style={styles.centerText}>选择日期</Text>
+            </View>
+            <Button
+              title="下一步"
+              type="clear"
+              titleStyle={styles.rightText}
+              disabledTitleStyle={styles.disabledStyle}
+              disabled={Boolean(
+                dateRange.filter((date) => date === undefined).length
+              )}
+              onPress={() => {
+                navigation.navigate('Info');
+              }}
+            />
+          </View>
+          <CalendarList
+            pastScrollRange={0}
+            minDate={today.current}
+            current={today.current}
+            markingType="period"
+            markedDates={periodDay}
+            theme={{
+              'stylesheet.day.period': {
+                base: {
+                  overflow: 'hidden',
+                  height: 34,
+                  alignItems: 'center',
+                  width: 38,
+                },
+              },
+            }}
+            onDayPress={handleDayPress}
+          />
+        </>
+      )}
     </>
   );
 };
