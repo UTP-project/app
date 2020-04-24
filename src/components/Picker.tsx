@@ -4,13 +4,14 @@ import {
   Text,
   Modal,
   StyleSheet,
-  TouchableNativeFeedback,
   TouchableOpacity,
   TouchableWithoutFeedback,
   ScrollView,
   Dimensions,
 } from 'react-native';
 import {Icon} from 'react-native-elements';
+
+import TouchableWrapper from './TouchableWrapper';
 
 export type Option = {
   label: string;
@@ -40,20 +41,18 @@ const Picker = ({selected, options, onSelect}: Props) => {
 
   return (
     <>
-      <View style={styles.feedbackContainer}>
-        <TouchableNativeFeedback
-          background={TouchableNativeFeedback.Ripple('#ccc', false)}
-          onPress={() => {
-            setVisible(true);
-          }}>
-          <View style={styles.pickerContainer}>
-            <Text style={styles.pickerText}>{selectedLabel}</Text>
-            <View>
-              <Icon type="font-awesome" name="caret-down" color="#888" />
-            </View>
+      <TouchableWrapper
+        containerStyle={styles.feedbackContainer}
+        onPress={() => {
+          setVisible(true);
+        }}>
+        <View style={styles.pickerContainer}>
+          <Text style={styles.pickerText}>{selectedLabel}</Text>
+          <View>
+            <Icon type="font-awesome" name="caret-down" color="#888" />
           </View>
-        </TouchableNativeFeedback>
-      </View>
+        </View>
+      </TouchableWrapper>
       <Modal
         animationType="fade"
         transparent
@@ -70,13 +69,13 @@ const Picker = ({selected, options, onSelect}: Props) => {
             <TouchableWithoutFeedback>
               <ScrollView style={styles.modalMain}>
                 {options.map((option) => (
-                  <TouchableNativeFeedback
+                  <TouchableWrapper
                     key={option.value}
                     onPress={() => handleSelect(option.value)}>
                     <View style={styles.modalItem}>
                       <Text style={styles.modalItemText}>{option.label}</Text>
                     </View>
-                  </TouchableNativeFeedback>
+                  </TouchableWrapper>
                 ))}
               </ScrollView>
             </TouchableWithoutFeedback>
@@ -93,7 +92,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 48,
     borderRadius: 4,
-    overflow: 'hidden',
   },
   pickerContainer: {
     width: '100%',
