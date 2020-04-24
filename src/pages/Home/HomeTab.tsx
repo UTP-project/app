@@ -1,11 +1,12 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Icon} from 'react-native-elements';
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 
 import Journey from './Journey';
 import NewJourney from './NewJourney';
 import Discovery from './Discovery';
+import RoundTouchableWrapper from '../../components/RoundTouchableWrapper';
 
 export type HomeTabParamList = {
   Journey: undefined;
@@ -38,7 +39,11 @@ const HomeTab = () => {
         component={NewJourney}
         options={{
           tabBarLabel: () => <View />,
-          tabBarIcon: () => <Icon reverse name="add" />,
+          tabBarIcon: () => (
+            <RoundTouchableWrapper size={60} backgroundColor="#4DB6AC">
+              <Icon name="add" color="white" containerStyle={styles.icon} />
+            </RoundTouchableWrapper>
+          ),
         }}
       />
       <Tab.Screen
@@ -59,5 +64,14 @@ const HomeTab = () => {
     </Tab.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  icon: {
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default HomeTab;

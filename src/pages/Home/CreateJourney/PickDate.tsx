@@ -4,12 +4,12 @@ import {View, StyleSheet, Text} from 'react-native';
 import {Icon, Button} from 'react-native-elements';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {CompositeNavigationProp} from '@react-navigation/native';
-import {TouchableNativeFeedback} from 'react-native-gesture-handler';
 
 import {CreateJourneyParamList} from '.';
 import {HomeStackParamList} from '..';
 import {dateFormat} from '../../../common/utils';
 import useReady from '../../../components/useReady';
+import RoundTouchableWrapper from '../../../components/RoundTouchableWrapper';
 
 export type DateRange = [string | undefined, string | undefined];
 
@@ -78,15 +78,20 @@ const PickDate = ({navigation}: Props) => {
       {ready && (
         <>
           <View style={styles.header}>
-            <Icon
-              name="arrow-back"
-              color="#fff"
-              size={28}
-              Component={TouchableNativeFeedback}
-              onPress={() => {
-                navigation.navigate('HomeTab');
-              }}
-            />
+            <View>
+              <RoundTouchableWrapper
+                size={48}
+                onPress={() => {
+                  navigation.navigate('HomeTab');
+                }}>
+                <Icon
+                  name="arrow-back"
+                  color="#fff"
+                  size={28}
+                  containerStyle={styles.icon}
+                />
+              </RoundTouchableWrapper>
+            </View>
             <View style={styles.headerCenter}>
               <Text style={styles.centerText}>选择日期</Text>
             </View>
@@ -135,6 +140,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     height: 64,
     backgroundColor: '#4DB6AC',
+  },
+  icon: {
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   headerCenter: {
     flex: 1,

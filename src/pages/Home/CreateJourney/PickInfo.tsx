@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import {Text, View, StyleSheet, Dimensions} from 'react-native';
 import {Icon, Button} from 'react-native-elements';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {TouchableNativeFeedback} from 'react-native-gesture-handler';
 
 import {CreateJourneyParamList} from '.';
 import Picker, {Option} from '../../../components/Picker';
+import RoundTouchableWrapper from '../../../components/RoundTouchableWrapper';
 
 type PickInfoOption = {
   pplNum: Option[];
@@ -66,15 +66,20 @@ const PickInfo = ({navigation}: Props) => {
   return (
     <>
       <View style={styles.header}>
-        <Icon
-          name="arrow-back"
-          color="#fff"
-          size={28}
-          Component={TouchableNativeFeedback}
-          onPress={() => {
-            navigation.navigate('Date');
-          }}
-        />
+        <View>
+          <RoundTouchableWrapper
+            size={48}
+            onPress={() => {
+              navigation.navigate('Date');
+            }}>
+            <Icon
+              name="arrow-back"
+              color="#fff"
+              size={28}
+              containerStyle={styles.icon}
+            />
+          </RoundTouchableWrapper>
+        </View>
         <View style={styles.headerCenter}>
           <Text style={styles.centerText}>选择行程信息</Text>
         </View>
@@ -142,6 +147,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     height: 64,
     backgroundColor: '#4DB6AC',
+  },
+  icon: {
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   headerCenter: {
     flex: 1,

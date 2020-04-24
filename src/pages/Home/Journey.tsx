@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, ScrollView} from 'react-native';
 import {Card, Text} from 'react-native-elements';
-import {TouchableNativeFeedback} from 'react-native-gesture-handler';
+import TouchableWrapper from '../../components/TouchableWrapper';
 
 const Journey = () => {
   const [journey] = useState([
@@ -36,7 +36,7 @@ const Journey = () => {
         <View style={styles.container}>
           {journey.map((o) => (
             <View key={o.id} style={styles.actionCardContainer}>
-              <TouchableNativeFeedback onPress={() => {}}>
+              <TouchableWrapper onPress={() => {}}>
                 <Card
                   imageStyle={styles.image}
                   image={{uri: o.image}}
@@ -55,7 +55,7 @@ const Journey = () => {
                     </View>
                   </View>
                 </Card>
-              </TouchableNativeFeedback>
+              </TouchableWrapper>
             </View>
           ))}
         </View>
