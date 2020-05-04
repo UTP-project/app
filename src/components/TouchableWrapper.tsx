@@ -15,6 +15,7 @@ export type TouchableWrapperProp = {
   rippleColor?: string;
   borderless?: boolean;
   onPress?: (event: GestureResponderEvent) => void;
+  onLongPress?: (event: GestureResponderEvent) => void;
   children: React.ReactNode;
 };
 
@@ -23,6 +24,7 @@ const TouchableWrapper = ({
   rippleColor = 'rgbs(0, 0, 0, 0.8)',
   borderless,
   onPress,
+  onLongPress,
   children,
 }: TouchableWrapperProp) => {
   const viewStyle = StyleSheet.flatten([styles.container, containerStyle]);
@@ -33,6 +35,7 @@ const TouchableWrapper = ({
         style={styles.touchable}
         background={TouchableNativeFeedback.Ripple(rippleColor, borderless)}
         onPress={onPress}
+        onLongPress={onLongPress}
         useForeground={true}>
         {children}
       </TouchableNativeFeedback>
