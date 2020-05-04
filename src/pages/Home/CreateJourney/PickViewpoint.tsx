@@ -6,14 +6,14 @@ import {Icon, Button} from 'react-native-elements';
 
 type PickInfoNavigationProp = StackNavigationProp<
   CreateJourneyParamList,
-  'City'
+  'Viewpoint'
 >;
 
 type Props = {
   navigation: PickInfoNavigationProp;
 };
 
-const PickCity = ({navigation}: Props) => {
+const PickViewpoint = ({navigation}: Props) => {
   return (
     <>
       <View style={styles.header}>
@@ -24,12 +24,12 @@ const PickCity = ({navigation}: Props) => {
             size={28}
             containerStyle={styles.icon}
             onPress={() => {
-              navigation.navigate('Info');
+              navigation.navigate('City');
             }}
           />
         </View>
         <View style={styles.headerCenter}>
-          <Text style={styles.centerText}>选择目的地</Text>
+          <Text style={styles.centerText}>选择景点</Text>
         </View>
         <Button
           title="下一步"
@@ -80,4 +80,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PickCity;
+export default PickViewpoint;
