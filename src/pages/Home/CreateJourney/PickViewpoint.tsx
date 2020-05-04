@@ -37,7 +37,7 @@ const PickViewpoint = ({navigation}: Props) => {
           titleStyle={styles.rightText}
           disabledTitleStyle={styles.disabledStyle}
           onPress={() => {
-            navigation.navigate('Viewpoint');
+            navigation.navigate('Result');
           }}
         />
       </View>
