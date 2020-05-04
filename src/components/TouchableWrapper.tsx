@@ -7,8 +7,8 @@ import {
   TextStyle,
   ImageStyle,
   GestureResponderEvent,
+  TouchableNativeFeedback,
 } from 'react-native';
-import {TouchableNativeFeedback} from 'react-native-gesture-handler';
 
 export type TouchableWrapperProp = {
   containerStyle?: StyleProp<ViewStyle | TextStyle | ImageStyle>;
@@ -20,7 +20,7 @@ export type TouchableWrapperProp = {
 
 const TouchableWrapper = ({
   containerStyle,
-  rippleColor,
+  rippleColor = 'rgbs(0, 0, 0, 0.8)',
   borderless,
   onPress,
   children,

@@ -5,7 +5,6 @@ import {StackNavigationProp} from '@react-navigation/stack';
 
 import {CreateJourneyParamList} from '.';
 import Picker, {Option} from '../../../components/Picker';
-import RoundTouchableWrapper from '../../../components/RoundTouchableWrapper';
 
 type PickInfoOption = {
   pplNum: Option[];
@@ -67,18 +66,15 @@ const PickInfo = ({navigation}: Props) => {
     <>
       <View style={styles.header}>
         <View>
-          <RoundTouchableWrapper
-            size={48}
+          <Icon
+            name="arrow-back"
+            color="#fff"
+            size={28}
+            containerStyle={styles.icon}
             onPress={() => {
               navigation.navigate('Date');
-            }}>
-            <Icon
-              name="arrow-back"
-              color="#fff"
-              size={28}
-              containerStyle={styles.icon}
-            />
-          </RoundTouchableWrapper>
+            }}
+          />
         </View>
         <View style={styles.headerCenter}>
           <Text style={styles.centerText}>选择行程信息</Text>

@@ -9,7 +9,6 @@ import {CreateJourneyParamList} from '.';
 import {HomeStackParamList} from '..';
 import {dateFormat} from '../../../common/utils';
 import useReady from '../../../components/useReady';
-import RoundTouchableWrapper from '../../../components/RoundTouchableWrapper';
 
 export type DateRange = [string | undefined, string | undefined];
 
@@ -79,18 +78,15 @@ const PickDate = ({navigation}: Props) => {
         <>
           <View style={styles.header}>
             <View>
-              <RoundTouchableWrapper
-                size={48}
+              <Icon
+                name="arrow-back"
+                color="#fff"
+                size={28}
+                containerStyle={styles.icon}
                 onPress={() => {
                   navigation.navigate('HomeTab');
-                }}>
-                <Icon
-                  name="arrow-back"
-                  color="#fff"
-                  size={28}
-                  containerStyle={styles.icon}
-                />
-              </RoundTouchableWrapper>
+                }}
+              />
             </View>
             <View style={styles.headerCenter}>
               <Text style={styles.centerText}>选择日期</Text>

@@ -6,7 +6,6 @@ import {View, StyleSheet} from 'react-native';
 import Journey from './Journey';
 import NewJourney from './NewJourney';
 import Discovery from './Discovery';
-import RoundTouchableWrapper from '../../components/RoundTouchableWrapper';
 
 export type HomeTabParamList = {
   Journey: undefined;
@@ -40,9 +39,13 @@ const HomeTab = () => {
         options={{
           tabBarLabel: () => <View />,
           tabBarIcon: () => (
-            <RoundTouchableWrapper size={60} backgroundColor="#4DB6AC">
-              <Icon name="add" color="white" containerStyle={styles.icon} />
-            </RoundTouchableWrapper>
+            <Icon
+              reverse
+              reverseColor="white"
+              name="add"
+              color="#4DB6AC"
+              containerStyle={styles.icon}
+            />
           ),
         }}
       />
